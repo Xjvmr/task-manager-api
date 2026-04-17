@@ -1,0 +1,61 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="true" type="TomeeConfiguration" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false">
+    <option name="LOCAL" value="false" />
+    <deployment />
+    <server-settings>
+      <data>
+        <option name="targets">
+          <list>
+            <WatchedTargetModelImpl>
+              <option name="name" value="CONTEXT_XML" />
+              <option name="transportStagingTarget">
+                <TransportTarget>
+                  <option name="id" value="ddeb85a8-04d5-4d54-a201-e494e07eb5e2" />
+                  <id>ddeb85a8-04d5-4d54-a201-e494e07eb5e2</id>
+                </TransportTarget>
+              </option>
+              <option name="watchedLocalPath" value="" />
+              <watched-path />
+              <name>CONTEXT_XML</name>
+              <transport-target>
+                <TransportTarget>
+                  <option name="id" value="ddeb85a8-04d5-4d54-a201-e494e07eb5e2" />
+                  <id>ddeb85a8-04d5-4d54-a201-e494e07eb5e2</id>
+                </TransportTarget>
+              </transport-target>
+            </WatchedTargetModelImpl>
+            <StagingTargetModelImpl>
+              <option name="name" value="STAGING" />
+              <option name="stagingRemotePath" value="" />
+              <option name="transportStagingTarget">
+                <TransportTarget>
+                  <option name="id" value="9f7300de-f094-417d-bf18-3ee31f81b2f1" />
+                  <id>9f7300de-f094-417d-bf18-3ee31f81b2f1</id>
+                </TransportTarget>
+              </option>
+              <staging-path />
+              <name>STAGING</name>
+              <transport-target>
+                <TransportTarget>
+                  <option name="id" value="9f7300de-f094-417d-bf18-3ee31f81b2f1" />
+                  <id>9f7300de-f094-417d-bf18-3ee31f81b2f1</id>
+                </TransportTarget>
+              </transport-target>
+            </StagingTargetModelImpl>
+          </list>
+        </option>
+        <option name="transportHostId" value="" />
+        <host-id />
+      </data>
+    </server-settings>
+    <predefined_log_file enabled="true" id="Tomcat" />
+    <predefined_log_file enabled="true" id="TOMCAT_LOCALHOST_LOG_ID" />
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="52982" />
+      <option name="LOCAL" value="false" />
+    </RunnerSettings>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
