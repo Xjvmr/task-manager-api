@@ -1,5 +1,6 @@
 package br.com.JoaoVictor.todolist.filter;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import br.com.JoaoVictor.todolist.user.IUserRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.FilterChain;
@@ -10,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-
-import static java.util.Base64.getDecoder;
-
 
 @Component
 public class FilterTaskAuth  extends OncePerRequestFilter {
@@ -25,29 +24,53 @@ public class FilterTaskAuth  extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
 
-        //pegar a autenticação
-        var autorization= request.getHeader("Authorization");
+        var servletPath = request.getServletPath();
+        if (!servletPath.startsWith("/tasks")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
 
-        var authEncoded = autorization.substring("Basic".length()).trim();
+        // pegar a autenticacao
+        var authorization = request.getHeader("Authorization");
+        if (authorization == null || !authorization.startsWith("Basic ")) {
+            response.sendError(401, "Authorization ausente ou invalida.");
+            return;
+        }
 
-        byte [] authDecode = Base64.getDecoder().decode(authEncoded);
+        var authEncoded = authorization.substring("Basic".length()).trim();
+        byte[] authDecode;
+        try {
+            authDecode = Base64.getDecoder().decode(authEncoded);
+        } catch (IllegalArgumentException ex) {
+            response.sendError(401, "Authorization Basic invalida.");
+            return;
+        }
 
-        var authString =new String(authDecode);
+        var authString = new String(authDecode, StandardCharsets.UTF_8);
+        String[] credentials = authString.split(":", 2);
+        if (credentials.length < 2) {
+            response.sendError(401, "Credenciais invalidas.");
+            return;
+        }
 
-        String [] credentials = authString.split(":");
         String username = credentials[0];
         String password = credentials[1];
 
+        // validar usuario
+        var user = this.userRepository.findByuserName(username);
+        if (user == null) {
+            response.sendError(401, "Usuario ou senha invalidos.");
+            return;
+        }
 
-        // validae usuario
-            var user = this.userRepository.findByuserName(username);
-            if (user == null) {
+        // validar senha
+        var passwordVerify = BCrypt.verifyer().verify(password.toCharArray(), user.getPassword());
+        if (!passwordVerify.verified) {
+            response.sendError(401, "Usuario ou senha invalidos.");
+            return;
+        }
 
-            }
-
-        // validae senha
-
-        //seguinte
+        filterChain.doFilter(request, response);
     }
 
 }
