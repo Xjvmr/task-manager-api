@@ -26,6 +26,4 @@ public class TaskModel {
     private LocalDateTime creatAT;
     private UUID idUser;
 
-
-
 }

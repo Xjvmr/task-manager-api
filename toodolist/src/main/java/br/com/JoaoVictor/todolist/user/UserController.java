@@ -28,10 +28,10 @@ public class UserController {
           System.out.println("usuario: "+userModel.getUserName() +" ja existe");
           return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("usuario ja existe");
         }
-//        criptografia de senha
+        //criptografia de senha
       var passwordHashered=BCrypt.withDefaults().hashToString(12, userModel.getPassword().toCharArray());
       userModel.setPassword(passwordHashered);
         var userCreated = this.userRepository.save(userModel);
-        return ResponseEntity.status(HttpStatus.CREATED).body("usuario: "+userModel.getUserName() +" criado com sucesso");
+        return ResponseEntity.status(HttpStatus.CREATED).body("usuario: "+userModel.getUserName() +"criado  com sucesso");
     }
 }
