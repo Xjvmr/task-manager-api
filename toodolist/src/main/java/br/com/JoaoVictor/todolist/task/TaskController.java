@@ -39,4 +39,9 @@ public class TaskController {
         var task = this.taskRepository.save(taskModel);
         return ResponseEntity.status(HttpStatus.OK).body(taskModel);
     }
+
+    public void list(HttpServletRequest request){
+        var idUser = request.getAttribute("idUser");
+        this.taskRepository.findByIdUser((UUID)idUser);
+    }
 }
