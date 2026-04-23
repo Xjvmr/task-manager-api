@@ -15,11 +15,13 @@ import static java.util.GregorianCalendar.BC;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    // Base URL: http://localhost:8080/users
 
     /*gerrencia UIrepository */
     @Autowired
     private IUserRepository userRepository;
 
+    // Endpoint: POST http://localhost:8080/users/cadastro
     @PostMapping("/cadastro")
     //  ResponseEntity objeto de retorno erro/ sucesso spring
     public ResponseEntity cadastro (@RequestBody UserModel userModel){
