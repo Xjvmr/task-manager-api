@@ -19,6 +19,7 @@ public class TaskController {
     private ITaskRepository taskRepository;
 
     // Endpoint: POST http://localhost:8080/tasks/create
+    // O que faz: cria uma nova tarefa para o usuario autenticado e valida datas.
     @PostMapping("/create")
     public ResponseEntity<Object> create(@RequestBody TaskModel taskModel, HttpServletRequest request) {
         var idUser = request.getAttribute("idUser");
@@ -41,16 +42,20 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.OK).body(task);
     }
     // Endpoint: GET http://localhost:8080/tasks/
+    // O que faz: lista todas as tarefas do usuario autenticado.
     @GetMapping ("/")
     public List<TaskModel> list(HttpServletRequest request){
         var idUser = request.getAttribute("idUser");
         return this.taskRepository.findByIdUser((UUID)idUser);
     }
     // Endpoint: PUT http://localhost:8080/tasks/{id}
+    // atualiza os dados de uma tarefa existente pelo id.
     @PutMapping ("/{id}")
     public TaskModel update (@RequestBody TaskModel taskModel, HttpServletRequest  request,@PathVariable UUID id){
+        var idUser = request.getAttribute("idUser");
+        taskModel.setIdUser((UUID)  idUser);
         taskModel.setId(id);
-        this.taskRepository.save(taskModel);
-        return taskModel;
+        return this.taskRepository.save(taskModel);
+
     }
 }

@@ -22,6 +22,7 @@ public class UserController {
     private IUserRepository userRepository;
 
     // Endpoint: POST http://localhost:8080/users/cadastro
+    // O que faz: cadastra um novo usuario, valida nome unico e criptografa senha.
     @PostMapping("/cadastro")
     //  ResponseEntity objeto de retorno erro/ sucesso spring
     public ResponseEntity cadastro (@RequestBody UserModel userModel){
