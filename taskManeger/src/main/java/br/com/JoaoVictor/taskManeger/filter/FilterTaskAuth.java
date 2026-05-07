@@ -1,8 +1,7 @@
-package br.com.JoaoVictor.todolist.filter;
+package br.com.JoaoVictor.taskManeger.filter;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import br.com.JoaoVictor.todolist.user.IUserRepository;
-import jakarta.servlet.*;
+import br.com.JoaoVictor.taskManeger.user.IUserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

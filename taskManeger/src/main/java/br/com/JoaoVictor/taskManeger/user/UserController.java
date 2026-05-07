@@ -1,7 +1,6 @@
-package br.com.JoaoVictor.todolist.user;
+package br.com.JoaoVictor.taskManeger.user;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import static java.util.GregorianCalendar.BC;
 
 @RestController
 @RequestMapping("/users")

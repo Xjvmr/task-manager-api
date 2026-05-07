@@ -1,4 +1,4 @@
-package br.com.JoaoVictor.todolist.task;
+package br.com.JoaoVictor.taskManeger.task;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

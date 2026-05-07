@@ -1,4 +1,4 @@
-package br.com.JoaoVictor.todolist.task;
+package br.com.JoaoVictor.taskManeger.task;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

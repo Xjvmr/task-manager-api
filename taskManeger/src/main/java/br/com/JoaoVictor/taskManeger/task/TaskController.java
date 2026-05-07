@@ -1,6 +1,6 @@
-package br.com.JoaoVictor.todolist.task;
+package br.com.JoaoVictor.taskManeger.task;
 
-import br.com.JoaoVictor.todolist.ultis.Ultils;
+import br.com.JoaoVictor.taskManeger.ultis.Ultils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

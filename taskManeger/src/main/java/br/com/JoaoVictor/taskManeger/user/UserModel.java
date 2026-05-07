@@ -1,6 +1,5 @@
-package br.com.JoaoVictor.todolist.user;
+package br.com.JoaoVictor.taskManeger.user;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

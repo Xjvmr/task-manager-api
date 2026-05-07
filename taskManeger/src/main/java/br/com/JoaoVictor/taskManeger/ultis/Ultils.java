@@ -1,4 +1,4 @@
-package br.com.JoaoVictor.todolist.ultis;
+package br.com.JoaoVictor.taskManeger.ultis;
 
 import java.beans.PropertyDescriptor;
 import java.util.HashSet;
