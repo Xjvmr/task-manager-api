@@ -25,6 +25,8 @@ public class TaskController {
         var idUser = request.getAttribute("idUser");
         taskModel.setIdUser((UUID)  idUser);
         var currentDate = LocalDate.now();
+        // 10/11/2026 inicio
+        // 10/12/2026 fim
         var startDate = taskModel.getStartAT().toLocalDate();
         var endDate = taskModel.getEndtAT().toLocalDate();
 

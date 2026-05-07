@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public class TaskModel {
     @GeneratedValue(generator = "UUID")
     private UUID id;
     private String description;
-    @Column(length = 100)
+    @Column(length = 50)
     private String title;
     private LocalDateTime startAT;
     private LocalDateTime endtAT;
@@ -25,5 +26,15 @@ public class TaskModel {
 
     private LocalDateTime creatAT;
     private UUID idUser;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    public void setTitle(String title) throws Exception{
+        if (title.length() > 50) {
+            throw new Exception(" o campo title deve conter no maximo 50 caracteres");
+        }
+        this.title = title;
+    }
 
 }
