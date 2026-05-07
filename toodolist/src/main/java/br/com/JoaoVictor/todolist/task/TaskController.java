@@ -1,12 +1,12 @@
 package br.com.JoaoVictor.todolist.task;
 
+import br.com.JoaoVictor.todolist.ultis.Ultils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.PublicKey;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -51,12 +51,24 @@ public class TaskController {
     // Endpoint: PUT http://localhost:8080/tasks/{id}
     // atualiza os dados de uma tarefa existente pelo id.
     @PutMapping ("/{id}")
-    public TaskModel update (@RequestBody TaskModel taskModel, HttpServletRequest  request,@PathVariable UUID id){
+    public ResponseEntity<Object> update (@RequestBody TaskModel taskModel, HttpServletRequest  request,@PathVariable UUID id){
+
+        var task = this.taskRepository.findById(id).orElse(null);
+        if (task == null){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("tarefa não encontrada");
+        }
         var idUser = request.getAttribute("idUser");
-        this.taskRepository.findByid(id);
-        taskModel.setIdUser((UUID)  idUser);
-        taskModel.setId(id);
-        return this.taskRepository.save(taskModel);
+        if (!task.getIdUser().equals(idUser)) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Usuario não tem permissão para alterar essa tarefa");
+        }
+
+        if (!task.getIdUser().equals((UUID) idUser)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("usuario nao tem permissao para alterar essa tarefa");
+        }
+
+        Ultils.copyNonNullProperties(taskModel, task);
+        var taskUpdated = this.taskRepository.save(task);
+        return ResponseEntity.ok().body(taskUpdated);
 
     }
 }
